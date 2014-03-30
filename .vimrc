@@ -1,6 +1,5 @@
 set nocompatible
 
-set rtp+=/usr/local/go/misc/vim/
 filetype plugin indent on
 syntax on
 " Pathogen
@@ -103,17 +102,6 @@ let g:fugitive_github_domains = ['https://github.banksimple.com']
 
 " | vertial splits
 hi VertSplit guibg=NONE
-
-" GOVIM
-function! s:GoLint()
-  cexpr system("golint " . shellescape(expand('%')))
-  copen
-endfunction
-command! GoLint :call s:GoLint()
-" au FileType go au BufWritePre <buffer> Fmt
-" let g:SuperTabDefaultCompletionType = "context"
-let g:gocode_gofmt_tabwidth = ""
-let g:gocode_gofmt_tabs     = ""
 
 " DASH
 :nmap <silent> <leader>d <Plug>DashSearch
