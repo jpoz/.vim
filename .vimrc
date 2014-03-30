@@ -29,6 +29,10 @@ set cursorline
 "   set clipboard=unnamed
 " endif
 
+" clipboard => system
+set clipboard=unnamed
+
+
 set expandtab
 set shiftwidth=2
 set tabstop=2
@@ -68,13 +72,15 @@ let NERDTreeIgnore=['\.DS_Store','\.pyc','\~$','\.swo$','\.swp$','\.git','\.hg',
 " colorscheme jellybeans
 
 " base-16
-if has('gui_running')
-    set background=light
-    colorscheme base16-solarized
-else
-  set background=light
-  colorscheme Tomorrow
-endif
+" if has('gui_running')
+"   set background=dark
+"   colorscheme base16-solarized
+" else
+"   set background=light
+"   colorscheme Tomorrow
+" endif
+set background=dark
+colorscheme solarized
 
 " Symbol plug-in settings
 set wildmode=list:longest,full
@@ -88,10 +94,10 @@ set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
 
 " Awesome tabs and good scrollbards
-set guioptions+=lrb
 set guioptions-=lrb
 set guioptions-=e
-
+set guioptions-=L
+set guioptions-=r
 " SIMPLE
 let g:fugitive_github_domains = ['https://github.banksimple.com']
 
@@ -114,3 +120,7 @@ let g:gocode_gofmt_tabs     = ""
 
 " WHITESPACE
 " autocmd BufWritePost * FixWhitespace
+"
+" YANKSTACK CONFIG
+nmap <leader>p <Plug>yankstack_substitute_older_paste
+nmap <leader>P <Plug>yankstack_substitute_newer_paste
