@@ -29,8 +29,7 @@ set cursorline
 " endif
 
 " clipboard => system
-set clipboard=unnamed
-
+set clipboard^=unnamed
 
 set expandtab
 set shiftwidth=2
@@ -112,3 +111,6 @@ hi VertSplit guibg=NONE
 " YANKSTACK CONFIG
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
+
+let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
