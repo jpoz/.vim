@@ -1,5 +1,9 @@
 set nocompatible
 
+" Custom dirs
+set dir=~/tmp
+set backupdir=~/backups
+
 filetype plugin indent on
 syntax on
 
@@ -40,35 +44,16 @@ let NERDTreeKeepTreeInNewTab=1
 let g:nerdtree_tabs_open_on_gui_startup=1
 
 
-" JPoz extras
+" Quit if we just have NerdTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 map <C-n> :NERDTreeToggle<CR>
+
+" Color
 set colorcolumn=80
-set dir=~/tmp
-set backupdir=~/backups
 
 let NERDTreeIgnore=['\.DS_Store','\.pyc','\~$','\.swo$','\.swp$','\.git','\.hg','\.svn','\.bzr']
 
-" if has('gui_running')
-"     set background=light
-"     colorscheme solarized
-" else
-"     set background=dark
-"     colorscheme Tomorrow
-" endifo
-"
-" Jellybean
-" let g:jellybeans_use_lowcolor_black = 0
-" colorscheme jellybeans
-
-" base-16
-" if has('gui_running')
-"   set background=dark
-"   colorscheme base16-solarized
-" else
-"   set background=light
-"   colorscheme Tomorrow
-" endif
+set background=light
 set background=dark
 colorscheme solarized
 
@@ -81,7 +66,7 @@ let g:symbol_patterns = { 'javascript': ['^\s\{0,3}\zs\w\+\ze:'], 'ruby': ['^\s\
 augroup General
   autocmd!
   " auto omnicompletion
-  autocmd FileType * 
+  autocmd FileType *
         \  if exists("+omnifunc") && &omnifunc == ""
           \| setlocal omnifunc=syntaxcomplete#Complete
         \| endif
@@ -124,9 +109,14 @@ autocmd BufWritePost * FixWhitespace
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
 
-" Cursor Setup
-let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+" Cursor Setup with TMUX
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
 
 " Window management
 set winwidth=84
@@ -143,3 +133,12 @@ nnoremap <leader><leader> <c-^>
 
 " Fuck you ;
 nnoremap ; :
+
+" disable folding
+set nofoldenable
+let g:vim_markdown_folding_disabled=1
+
+
+map gn :bn<cr>
+map gp :bp<cr>
+map gd :bd<cr>
